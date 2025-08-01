@@ -189,6 +189,8 @@ export async function getAllExtensionState(context: vscode.ExtensionContext) {
 		sapAiResourceGroup,
 		claudeCodePath,
 		huaweiCloudMaasApiKey,
+		difyApiKey,
+		difyBaseUrl,
 	] = await Promise.all([
 		getGlobalState(context, "isNewUser") as Promise<boolean | undefined>,
 		getGlobalState(context, "welcomeViewCompleted") as Promise<boolean | undefined>,
@@ -269,6 +271,8 @@ export async function getAllExtensionState(context: vscode.ExtensionContext) {
 		getGlobalState(context, "sapAiResourceGroup") as Promise<string | undefined>,
 		getGlobalState(context, "claudeCodePath") as Promise<string | undefined>,
 		getSecret(context, "huaweiCloudMaasApiKey") as Promise<string | undefined>,
+		getSecret(context, "difyApiKey") as Promise<string | undefined>,
+		getGlobalState(context, "difyBaseUrl") as Promise<string | undefined>,
 	])
 
 	const localClineRulesToggles = (await getWorkspaceState(context, "localClineRulesToggles")) as ClineRulesToggles
@@ -489,6 +493,8 @@ export async function getAllExtensionState(context: vscode.ExtensionContext) {
 			sapAiResourceGroup,
 			huggingFaceApiKey,
 			huaweiCloudMaasApiKey,
+			difyApiKey,
+			difyBaseUrl,
 			// Plan mode configurations
 			planModeApiProvider: planModeApiProvider || apiProvider,
 			planModeApiModelId,
@@ -631,6 +637,8 @@ export async function updateApiConfiguration(context: vscode.ExtensionContext, a
 		claudeCodePath,
 		huggingFaceApiKey,
 		huaweiCloudMaasApiKey,
+		difyApiKey,
+		difyBaseUrl,
 		// Plan mode configurations
 		planModeApiProvider,
 		planModeApiModelId,
@@ -777,6 +785,7 @@ export async function updateApiConfiguration(context: vscode.ExtensionContext, a
 		sapAiCoreTokenUrl,
 		sapAiResourceGroup,
 		claudeCodePath,
+		difyBaseUrl,
 	}
 
 	// OPTIMIZED: Batch all secret updates into 1 operation instead of 23
@@ -810,6 +819,7 @@ export async function updateApiConfiguration(context: vscode.ExtensionContext, a
 		sapAiCoreClientSecret,
 		huggingFaceApiKey,
 		huaweiCloudMaasApiKey,
+		difyApiKey,
 	}
 
 	// Execute batched operations in parallel for maximum performance
@@ -855,6 +865,7 @@ export async function resetGlobalState(context: vscode.ExtensionContext) {
 		"nebiusApiKey",
 		"huggingFaceApiKey",
 		"huaweiCloudMaasApiKey",
+		"difyApiKey",
 	]
 	for (const key of secretKeys) {
 		await storeSecret(context, key, undefined)

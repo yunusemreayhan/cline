@@ -65,6 +65,8 @@ export function convertApiConfigurationToProtoApiConfiguration(config: ApiConfig
 		sapAiResourceGroup: config.sapAiResourceGroup,
 		sapAiCoreTokenUrl: config.sapAiCoreTokenUrl,
 		sapAiCoreBaseUrl: config.sapAiCoreBaseUrl,
+		difyBaseUrl: config.difyBaseUrl,
+		difyApiKey: config.difyApiKey,
 
 		// Plan mode configurations
 		planModeApiProvider: config.planModeApiProvider,
@@ -159,6 +161,8 @@ export function convertProtoApiConfigurationToApiConfiguration(protoConfig: Prot
 		openAiBaseUrl: protoConfig.openaiBaseUrl,
 		openAiApiKey: protoConfig.openaiApiKey,
 		ollamaBaseUrl: protoConfig.ollamaBaseUrl,
+		difyApiKey: protoConfig.difyApiKey,
+		difyBaseUrl: protoConfig.difyBaseUrl,
 		ollamaApiOptionsCtxNum: protoConfig.ollamaApiOptionsCtxNum,
 		lmStudioBaseUrl: protoConfig.lmStudioBaseUrl,
 		geminiApiKey: protoConfig.geminiApiKey,

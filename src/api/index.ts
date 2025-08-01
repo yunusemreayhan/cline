@@ -32,6 +32,7 @@ import { GroqHandler } from "./providers/groq"
 import { Mode } from "@shared/storage/types"
 import { HuggingFaceHandler } from "./providers/huggingface"
 import { HuaweiCloudMaaSHandler } from "./providers/huawei-cloud-maas"
+import { DifyHandler } from "./providers/dify"
 
 export interface ApiHandler {
 	createMessage(systemPrompt: string, messages: Anthropic.Messages.MessageParam[]): ApiStream
@@ -280,6 +281,15 @@ function createHandlerForProvider(
 					mode === "plan" ? options.planModeHuaweiCloudMaasModelId : options.actModeHuaweiCloudMaasModelId,
 				huaweiCloudMaasModelInfo:
 					mode === "plan" ? options.planModeHuaweiCloudMaasModelInfo : options.actModeHuaweiCloudMaasModelInfo,
+			})
+		case "dify": // Add Dify.ai handler
+			console.log("[DIFY DEBUG] Instantiating DifyHandler with options:", {
+				difyApiKeyPresent: !!options.difyApiKey,
+				difyBaseUrl: options.difyBaseUrl,
+			})
+			return new DifyHandler({
+				difyApiKey: options.difyApiKey,
+				difyBaseUrl: options.difyBaseUrl,
 			})
 		default:
 			return new AnthropicHandler({

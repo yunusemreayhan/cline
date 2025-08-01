@@ -29,6 +29,7 @@ export type SecretKey =
 	| "sapAiCoreClientSecret"
 	| "groqApiKey"
 	| "huaweiCloudMaasApiKey"
+	| "difyApiKey"
 
 export type GlobalStateKey =
 	| "awsRegion"
@@ -83,6 +84,7 @@ export type GlobalStateKey =
 	| "sapAiCoreBaseUrl"
 	| "sapAiResourceGroup"
 	| "claudeCodePath"
+	| "difyBaseUrl"
 	// Settings around plan/act and ephemeral model configuration
 	| "preferredLanguage"
 	| "openaiReasoningEffort"

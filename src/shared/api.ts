@@ -31,6 +31,7 @@ export type ApiProvider =
 	| "groq"
 	| "huggingface"
 	| "huawei-cloud-maas"
+	| "dify"
 
 export interface ApiHandlerOptions {
 	// Global configuration (not mode-specific)
@@ -94,6 +95,8 @@ export interface ApiHandlerOptions {
 	sapAiCoreTokenUrl?: string
 	sapAiCoreBaseUrl?: string
 	huaweiCloudMaasApiKey?: string
+	difyApiKey?: string
+	difyBaseUrl?: string
 	onRetryAttempt?: (attempt: number, maxRetries: number, delay: number, error: any) => void
 	// Plan mode configurations
 	planModeApiModelId?: string
@@ -2794,6 +2797,8 @@ export type MoonshotModelId = keyof typeof moonshotModels
 export const moonshotDefaultModelId = "kimi-k2-0711-preview" satisfies MoonshotModelId
 
 // Huawei Cloud MaaS
+// Dify.ai - No model selection needed, models are configured in Dify workflows
+
 export type HuaweiCloudMaasModelId = keyof typeof huaweiCloudMaasModels
 export const huaweiCloudMaasDefaultModelId: HuaweiCloudMaasModelId = "DeepSeek-V3"
 export const huaweiCloudMaasModels = {

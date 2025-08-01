@@ -266,6 +266,20 @@ export function normalizeApiConfiguration(
 				selectedModelId: huaweiCloudMaasModelId || huaweiCloudMaasDefaultModelId,
 				selectedModelInfo: huaweiCloudMaasModelInfo || huaweiCloudMaasModels[huaweiCloudMaasDefaultModelId],
 			}
+		case "dify":
+			return {
+				selectedProvider: provider,
+				selectedModelId: "dify-workflow",
+				selectedModelInfo: {
+					maxTokens: 8192,
+					contextWindow: 128000,
+					supportsImages: true,
+					supportsPromptCache: false,
+					inputPrice: 0,
+					outputPrice: 0,
+					description: "Dify workflow - model selection is configured in your Dify application",
+				},
+			}
 		default:
 			return getProviderData(anthropicModels, anthropicDefaultModelId)
 	}
@@ -486,6 +500,11 @@ export async function syncModeConfigurations(
 			updates.actModeHuaweiCloudMaasModelId = sourceFields.huaweiCloudMaasModelId
 			updates.planModeHuaweiCloudMaasModelInfo = sourceFields.huaweiCloudMaasModelInfo
 			updates.actModeHuaweiCloudMaasModelInfo = sourceFields.huaweiCloudMaasModelInfo
+			break
+
+		case "dify":
+			// Dify doesn't have mode-specific model configurations
+			// The model is configured in the Dify application itself
 			break
 
 		// Providers that use apiProvider + apiModelId fields
