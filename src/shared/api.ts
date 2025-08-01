@@ -31,6 +31,7 @@ export type ApiProvider =
 	| "groq"
 	| "huggingface"
 	| "huawei-cloud-maas"
+	| "dify"
 
 export interface ApiHandlerOptions {
 	// Global configuration (not mode-specific)
@@ -94,6 +95,8 @@ export interface ApiHandlerOptions {
 	sapAiCoreTokenUrl?: string
 	sapAiCoreBaseUrl?: string
 	huaweiCloudMaasApiKey?: string
+	difyApiKey?: string
+	difyBaseUrl?: string
 	onRetryAttempt?: (attempt: number, maxRetries: number, delay: number, error: any) => void
 	// Plan mode configurations
 	planModeApiModelId?: string
@@ -2794,6 +2797,67 @@ export type MoonshotModelId = keyof typeof moonshotModels
 export const moonshotDefaultModelId = "kimi-k2-0711-preview" satisfies MoonshotModelId
 
 // Huawei Cloud MaaS
+// Dify.ai
+// https://docs.dify.ai/
+export type DifyModelId = keyof typeof difyModels
+export const difyDefaultModelId: DifyModelId = "gpt-4o"
+export const difyModels = {
+	"gpt-4o": {
+		maxTokens: 4096,
+		contextWindow: 128_000,
+		supportsImages: true,
+		supportsPromptCache: false,
+		inputPrice: 0,
+		outputPrice: 0,
+		description: "OpenAI GPT-4o via Dify.ai platform",
+	},
+	"gpt-4o-mini": {
+		maxTokens: 16_384,
+		contextWindow: 128_000,
+		supportsImages: true,
+		supportsPromptCache: false,
+		inputPrice: 0,
+		outputPrice: 0,
+		description: "OpenAI GPT-4o Mini via Dify.ai platform",
+	},
+	"claude-3-5-sonnet": {
+		maxTokens: 8192,
+		contextWindow: 200_000,
+		supportsImages: true,
+		supportsPromptCache: false,
+		inputPrice: 0,
+		outputPrice: 0,
+		description: "Anthropic Claude 3.5 Sonnet via Dify.ai platform",
+	},
+	"claude-3-haiku": {
+		maxTokens: 4096,
+		contextWindow: 200_000,
+		supportsImages: true,
+		supportsPromptCache: false,
+		inputPrice: 0,
+		outputPrice: 0,
+		description: "Anthropic Claude 3 Haiku via Dify.ai platform",
+	},
+	"gemini-pro": {
+		maxTokens: 8192,
+		contextWindow: 1_048_576,
+		supportsImages: true,
+		supportsPromptCache: false,
+		inputPrice: 0,
+		outputPrice: 0,
+		description: "Google Gemini Pro via Dify.ai platform",
+	},
+	custom: {
+		maxTokens: 8192,
+		contextWindow: 128_000,
+		supportsImages: true,
+		supportsPromptCache: false,
+		inputPrice: 0,
+		outputPrice: 0,
+		description: "Custom model configured in Dify.ai",
+	},
+} as const satisfies Record<string, ModelInfo>
+
 export type HuaweiCloudMaasModelId = keyof typeof huaweiCloudMaasModels
 export const huaweiCloudMaasDefaultModelId: HuaweiCloudMaasModelId = "DeepSeek-V3"
 export const huaweiCloudMaasModels = {
